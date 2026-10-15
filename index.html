@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EventForce Management System - a simple event planning dashboard demo." />
+  <title>EventForce | Event Management</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">E</span><div><strong>EventForce</strong><small>MANAGEMENT SYSTEM</small></div></div>
+    <p class="nav-label">WORKSPACE</p>
+    <button class="nav active" data-view="dashboard">▦ <span>Dashboard</span></button>
+    <button class="nav" data-view="events">◷ <span>Events</span></button>
+    <button class="nav" data-view="clients">♙ <span>Clients</span></button>
+    <button class="nav" data-view="venues">⌂ <span>Venues</span></button>
+    <button class="nav" data-view="vendors">✦ <span>Vendors</span></button>
+    <button class="nav" data-view="feedback">♡ <span>Feedback</span></button>
+    <div class="sidebar-bottom"><div class="avatar">SS</div><div><strong>Event Admin</strong><small>Project demo</small></div></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><span class="eyebrow">EVENT PLANNER SOLUTIONS</span><h1 id="page-title">Dashboard overview</h1></div><div class="top-actions"><span class="today" id="today"></span><button class="primary" id="add-event-top">＋ Add event</button></div></header>
+    <section id="dashboard-view" class="view">
+      <div class="welcome"><div><span class="eyebrow light">YOUR EVENTS, ORGANIZED</span><h2>Make every event count.</h2><p>Track bookings, coordinate venues and vendors, and keep every detail in one place.</p></div><div class="welcome-icon">✦</div></div>
+      <div class="stats">
+        <article class="stat-card"><div class="stat-top"><span>Total events</span><span class="stat-icon purple">▦</span></div><strong id="stat-events">0</strong><small>All scheduled events</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Active clients</span><span class="stat-icon blue">♙</span></div><strong id="stat-clients">0</strong><small>People in your client list</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Venues</span><span class="stat-icon orange">⌂</span></div><strong id="stat-venues">0</strong><small>Available venue records</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Feedback</span><span class="stat-icon green">♡</span></div><strong id="stat-feedback">0</strong><small>Responses collected</small></article>
+      </div>
+      <div class="content-grid"><article class="panel"><div class="panel-heading"><div><h3>Upcoming events</h3><p>Your next planned activities</p></div><button class="text-button" data-goto="events">View all →</button></div><div id="upcoming-list"></div></article><article class="panel"><div class="panel-heading"><div><h3>Quick actions</h3><p>Keep your workflow moving</p></div></div><div class="quick-actions"><button data-goto="events"><span class="quick-icon purple">＋</span><span><b>Create an event</b><small>Add a new event to the schedule</small></span><span class="arrow">›</span></button><button data-goto="clients"><span class="quick-icon blue">♙</span><span><b>Manage clients</b><small>Review client contacts</small></span><span class="arrow">›</span></button><button data-goto="feedback"><span class="quick-icon green">♡</span><span><b>Review feedback</b><small>Learn from recent events</small></span><span class="arrow">›</span></button></div></article></div>
+      <article class="panel project-note"><div class="note-mark">i</div><div><h3>Project demo note</h3><p>This front-end demo saves records in this browser using local storage. It is not connected to a live Salesforce org or database.</p></div></article>
+    </section>
+    <section id="events-view" class="view hidden"><div class="section-tools"><div><h2>Event schedule</h2><p>Plan and manage event details.</p></div><button class="primary" id="add-event">＋ Add event</button></div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Event name</th><th>Date</th><th>Type</th><th>Client</th><th>Venue</th><th>Status</th><th></th></tr></thead><tbody id="events-table"></tbody></table></div></div></section>
+    <section id="clients-view" class="view hidden"><div class="section-tools"><div><h2>Clients</h2><p>Client contact directory.</p></div><button class="primary" id="add-client">＋ Add client</button></div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Events</th></tr></thead><tbody id="clients-table"></tbody></table></div></div></section>
+    <section id="venues-view" class="view hidden"><div class="section-tools"><div><h2>Venues</h2><p>Manage event locations and capacity.</p></div><button class="primary" id="add-venue">＋ Add venue</button></div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Venue</th><th>Location</th><th>Capacity</th><th>Availability</th></tr></thead><tbody id="venues-table"></tbody></table></div></div></section>
+    <section id="vendors-view" class="view hidden"><div class="section-tools"><div><h2>Vendors</h2><p>Coordinate suppliers and services.</p></div><button class="primary" id="add-vendor">＋ Add vendor</button></div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Vendor</th><th>Service</th><th>Contact</th><th>Status</th></tr></thead><tbody id="vendors-table"></tbody></table></div></div></section>
+    <section id="feedback-view" class="view hidden"><div class="section-tools"><div><h2>Feedback</h2><p>Collect notes and satisfaction ratings.</p></div><button class="primary" id="add-feedback">＋ Add feedback</button></div><div id="feedback-list" class="feedback-grid"></div></section>
+    <footer>EventForce Management System <span>•</span> Student portfolio project</footer>
+  </main>
+  <dialog id="record-dialog"><form method="dialog" id="record-form"><div class="dialog-head"><div><span class="eyebrow">EVENTFORCE WORKSPACE</span><h2 id="dialog-title">Add record</h2></div><button type="button" class="close" id="close-dialog">×</button></div><div id="form-fields" class="form-fields"></div><div class="dialog-actions"><button type="button" class="secondary" id="cancel-dialog">Cancel</button><button type="submit" class="primary">Save record</button></div></form></dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
